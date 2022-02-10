@@ -11,6 +11,7 @@ django-ninja = "0.16.1"
 black = "21.12b0"
 django-stubs = "1.9.0"
 mypy = "0.931"
+isort = "5.10.1"
 
 [tool.poetry.dev-dependencies]
 
@@ -41,3 +42,7 @@ ignore_errors = true
 
 [tool.django-stubs]   # stubs는 장고 세팅 모듈의 위치를 알려줌.
 django_settings_module = "deep.settings"
+
+[tool.isort]
+# isort에게 나는 지금 black을 사용하고 있다고 알려주는 것(서로 호환되도록)
+profile = 'black'
