@@ -13,6 +13,8 @@ from pathlib import Path
 from typing import List
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import pymysql
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -73,11 +75,16 @@ WSGI_APPLICATION = "deep.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+pymysql.install_as_MySQLdb()  # 이것을 실행하면 pymysql을 사용하면서 mysql클라이언트를 실행하는 것처럼 됨
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",  # 원래는 이곳이 mysql클라이언트
+        "NAME": "sparta",  # 데이터베이스의 이름
+        "USER": "root",
+        "PASSWORD": "2349",  # 도커에서 만든 비밀번호
+        "HOST": "localhost",
+        "PORT": "3306",
     }
 }
 
