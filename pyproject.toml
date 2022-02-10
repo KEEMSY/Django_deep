@@ -9,6 +9,8 @@ python = "^3.9"
 Django = "4.0"
 django-ninja = "0.16.1"
 black = "21.12b0"
+django-stubs = "1.9.0"
+mypy = "0.931"
 
 [tool.poetry.dev-dependencies]
 
@@ -18,3 +20,24 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]    # [](대괄호): section을 의미함
 line-length = 120
+
+
+#pypy tjfwjd
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]  # mypy에게 장고플러그인을 사용하겠다고 알려줌
+python_version = 3.9 # 파이썬 버전은 3.9를 사용하겠다.
+strict = true # 이게 중요함 - stric설정으로 argument와 return값에 type hint가 제대로 되어 있는지 검사, 꼭 true여야함
+
+
+# 하단은 모듈 별 설정에 관한 이야기힘_override
+# 하단의 두개의 파일을 override한 이유는, 장고에의해 생성되었기 때문에(=수정할 일이 없다) mypy검사를 하지 않는다.
+[[tool.mypy.overrides]]
+module = "*.migrations.*" # migrations에 있는 모든 파일들에 대해 "ignore_errors = true":에러를 무시하겠다. == mypy검사를 하지 않겠다.
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "manage"
+ignore_errors = true
+
+[tool.django-stubs]   # stubs는 장고 세팅 모듈의 위치를 알려줌.
+django_settings_module = "deep.settings"
