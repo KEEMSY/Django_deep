@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from ninja import NinjaAPI
+
 # 닌자를 임포트
 
 # 닌자 객체화
@@ -29,5 +30,5 @@ def add(request, a: int, b: int):
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", api.urls),   # api에 등록된 모든 url들이 등록됨
+    path("api/", api.urls),  # api에 등록된 모든 url들이 등록됨
 ]
