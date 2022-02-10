@@ -35,4 +35,3 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", api.urls),  # api에 등록된 모든 url들이 등록됨
 ]
-
