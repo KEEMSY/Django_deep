@@ -1,12 +1,12 @@
-# 이름
+
 name: Django CI
-# 언제 실행이 되는지
+
 on:
   push:
 
 jobs:
   ci:
-    # 어디에서 실행이 되는지
+
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codes
@@ -15,8 +15,7 @@ jobs:
       - name: Setup python environment
         id: setup-python
         uses: actions/setup-python@v2
-        # uses 액션에 전달할 파라미터를 의미 : python version 3.9.9를 사용하겠다
-        # 파이썬을 세팅하는데 무슨 버전을 사용할 것이냐 ~
+
         with:
           python-version: 3.9.9
 
