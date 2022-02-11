@@ -19,8 +19,8 @@ jobs:
 
     - name: Set timezone to KST
       run: |
-    sudo rm /etc/localtime
-    sudo ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+        sudo rm /etc/localtime
+        sudo ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
     # Start Mysql
     # https://ovirium.com/blog/how-to-make-mysql-work-in-your-github-actions/
@@ -35,7 +35,7 @@ jobs:
       id: setup-python
       uses: actions/setup-python@v2
       with:
-      python-version: 3.9.9
+        python-version: 3.9.9
 
     - name: Install Poetry
       run: |
