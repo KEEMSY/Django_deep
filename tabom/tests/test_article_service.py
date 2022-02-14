@@ -1,7 +1,9 @@
 from django.test import TestCase
 
+from tabom.models import User
 from tabom.models.article import Article
-from tabom.services.article_service import get_an_article
+from tabom.services.article_service import get_an_article, get_article_list, get_article_page
+from tabom.services.like_service import do_like
 
 
 class TestArticleService(TestCase):
@@ -25,3 +27,37 @@ class TestArticleService(TestCase):
         # Expect
         with self.assertRaises(Article.DoesNotExist):
             get_an_article(invalid_article_id)
+
+    def test_get_article_list_should_prefetch_like(self) -> None:
+        # Given
+        user = User.objects.create(name='test_user')
+        articles =[Article.objects.create(title=f"{i}") for i in range(1,21)]
+        do_like(user.id, articles[-1].id)
+
+        # When
+        result_article = get_article_list(0,10)
+
+        # Then
+        self.assertEqual(len(result_article),10)
+        self.assertEqual(1,result_article[0].like_set.count())
+        self.assertEqual(
+            [a.id for a in reversed(articles[10:21])],   #reversed가 되었기 때문에 내림차순 정렬이 됨
+            [a.id for a in result_article],
+        )
+
+    # def test_get_article_page_should_prefetch_like(self) -> None:
+    #     # Given
+    #     user = User.objects.create(name='test_user')
+    #     articles =[Article.objects.create(title=f"{i}") for i in range(1,21)]
+    #     do_like(user.id, articles[-1].id)
+    #
+    #     # When
+    #     result_article = get_article_page(1,10)
+    #
+    #     # Then
+    #     self.assertEqual(len(result_article),10)
+    #     self.assertEqual(1,result_article[0].like_set.count())
+    #     self.assertEqual(
+    #         [a.id for a in reversed(articles[10:21])],   #reversed가 되었기 때문에 내림차순 정렬이 됨
+    #         [a.id for a in result_article],
+    #     )
