@@ -6,9 +6,9 @@ from ninja import Router
 from tabom.apis.v1.schemas.like_response import LikeResponse
 from tabom.apis.v1.schemas.like_schema import LikeRequest
 from tabom.models import Like
-from tabom.services.like_service import undo_like, do_like
+from tabom.services.like_service import do_like, undo_like
 
-router = Router()
+router = Router(tags=["likes"])
 
 
 @router.post("/", response={201: LikeResponse})  # like_request: LikeRequest -> 스키마 사용

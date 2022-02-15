@@ -4,8 +4,8 @@ from django.db.models import QuerySet
 from django.http import HttpRequest
 from ninja import Router
 
-from tabom.apis.v1.schemas.article_response import ArticleResponse
 from tabom.apis.v1.schemas.article_create_request import ArticleCreateRequest
+from tabom.apis.v1.schemas.article_response import ArticleResponse
 from tabom.models import Article
 from tabom.services.article_service import (
     create_an_article,
@@ -14,9 +14,7 @@ from tabom.services.article_service import (
     get_article_list,
 )
 
-router = Router()
-
-
+router = Router(tags=["articles"])
 
 
 # article 생성에 관한 코드 // 생성이 완료되었다고 알려주는 status code는 201
@@ -33,6 +31,7 @@ def create_article(request: HttpRequest, article_create_request: ArticleCreateRe
 def get_articles(request: HttpRequest, user_id: int, offset: int = 0, limit: int = 10) -> QuerySet[Article]:
     articles = get_article_list(user_id, offset, limit)
     return articles
+
 
 # 단건 조회 : 그냥 schemafmf return
 @router.get("/{article_id}", response=ArticleResponse)

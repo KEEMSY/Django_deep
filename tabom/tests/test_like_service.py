@@ -8,7 +8,7 @@ from tabom.services.like_service import do_like, undo_like
 
 
 class TestLikeService(TestCase):
-    def test_a_user_can_like_an_article(self) -> None:  # 됨
+    def test_a_user_can_like_an_article(self) -> None:
         # Given 유저와 게시글이 주어졌을 때
         user = User.objects.create(name="test")
         article = Article.objects.create(title="test_title")
@@ -21,7 +21,7 @@ class TestLikeService(TestCase):
         self.assertEqual(user.id, like.user_id)
         self.assertEqual(article.id, like.article_id)
 
-    def test_a_user_can_like_an_article_only_once(self) -> None:  # 됨
+    def test_a_user_can_like_an_article_only_once(self) -> None:
         # Given
         user = User.objects.create(name="test")
         article = Article.objects.create(title="test_title")
@@ -31,8 +31,8 @@ class TestLikeService(TestCase):
         with self.assertRaises(IntegrityError):
             like2 = do_like(user.id, article.id)
 
-    # user_id가 없는데 Input으로 들어온경우
-    def test_it_should_raise_exception_when_like_an_user_does_not_exist(self) -> None:  # 됨
+    # user_id가 없는데 Input으로 들어온 경우
+    def test_it_should_raise_exception_when_like_an_user_does_not_exist(self) -> None:
         # Given
         invalid_user_id = 9988
         article = Article.objects.create(title="test_title")
