@@ -21,6 +21,10 @@ def get_article_list(user_id: int, offset: int, limit: int) -> QuerySet[Article]
     )
 
 
+def delete_an_article(article_id: int) -> None:
+    Article.objects.filter(id=article_id).delete()
+
+
 # def get_aricle_list(offset: int, limit: int) -> QuerySet[Article]:
 #     # 내림차순 정렬 시 "-", 오름차순은 그냥 빈칸
 #     # 쿼리셋도 슬라이싱이 가능함
