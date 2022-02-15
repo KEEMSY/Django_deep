@@ -62,7 +62,7 @@ class TestLikeService(TestCase):
 
         # Then  article을 가져와서 좋아요 갯수를 검증함
         article = Article.objects.get(id=article.id)
-        self.assertEqual(1, article.like_set.count())
+        self.assertEqual(1, article.like_count)
 
     # 좋아요 취소
     def test_a_user_can_undo_like(self) -> None:  # 됨
