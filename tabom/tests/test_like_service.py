@@ -8,7 +8,7 @@ from tabom.services.like_service import do_like, undo_like
 
 
 class TestLikeService(TestCase):
-    def test_a_user_can_like_an_article(self) -> None:
+    def test_a_user_can_like_an_article(self) -> None:  # 됨
         # Given 유저와 게시글이 주어졌을 때
         user = User.objects.create(name="test")
         article = Article.objects.create(title="test_title")
@@ -21,7 +21,7 @@ class TestLikeService(TestCase):
         self.assertEqual(user.id, like.user_id)
         self.assertEqual(article.id, like.article_id)
 
-    def test_a_user_can_like_an_article_only_once(self) -> None:
+    def test_a_user_can_like_an_article_only_once(self) -> None:  # 됨
         # Given
         user = User.objects.create(name="test")
         article = Article.objects.create(title="test_title")
@@ -32,7 +32,7 @@ class TestLikeService(TestCase):
             like2 = do_like(user.id, article.id)
 
     # user_id가 없는데 Input으로 들어온경우
-    def test_it_should_raise_exception_when_like_an_user_does_not_exist(self) -> None:
+    def test_it_should_raise_exception_when_like_an_user_does_not_exist(self) -> None:  # 됨
         # Given
         invalid_user_id = 9988
         article = Article.objects.create(title="test_title")
@@ -42,7 +42,7 @@ class TestLikeService(TestCase):
             do_like(invalid_user_id, article.id)
 
     # article_id가 없는데 Input으로 들어온 경우
-    def test_it_should_raise_exception_when_like_an_article_does_not_exist(self) -> None:
+    def test_it_should_raise_exception_when_like_an_article_does_not_exist(self) -> None:  # 됨
         # Given
         user = User.objects.create(name="test")
         invalid_article_id = 9988
@@ -52,7 +52,7 @@ class TestLikeService(TestCase):
             do_like(user.id, invalid_article_id)
 
     # 좋아요 갯수 세기
-    def test_like_count_should_increase(self) -> None:
+    def test_like_count_should_increase(self) -> None:  # 됨
         # Given user와 article이 주어짐
         user = User.objects.create(name="test")
         article = Article.objects.create(title="test_title")
@@ -65,7 +65,7 @@ class TestLikeService(TestCase):
         self.assertEqual(1, article.like_set.count())
 
     # 좋아요 취소
-    def test_a_user_can_undo_like(self) -> None:
+    def test_a_user_can_undo_like(self) -> None:  # 됨
         # Given
         user = User.objects.create(name="test")
         article = Article.objects.create(title="test_title")
