@@ -19,7 +19,7 @@ def get_article_list(user_id: int, offset: int, limit: int) -> QuerySet[Article]
     return (
         Article.objects.order_by("-id")
         .prefetch_related("like_set")
-        .prefetch_related(Prefetch("like_set", queryset=Like.objects.all(), to_attr="my_likes"))[
+        .prefetch_related(Prefetch("like_set", queryset=Like.objects.filter(user_id=user_id), to_attr="my_likes"))[
             offset : offset + limit
         ]
     )
@@ -27,6 +27,7 @@ def get_article_list(user_id: int, offset: int, limit: int) -> QuerySet[Article]
 
 def delete_an_article(article_id: int) -> None:
     Article.objects.filter(id=article_id).delete()
+
 
 # def get_aricle_list(offset: int, limit: int) -> QuerySet[Article]:
 #     # 내림차순 정렬 시 "-", 오름차순은 그냥 빈칸
