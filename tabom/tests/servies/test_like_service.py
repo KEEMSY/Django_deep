@@ -21,6 +21,7 @@ class TestLikeService(TestCase):
         self.assertEqual(user.id, like.user_id)
         self.assertEqual(article.id, like.article_id)
 
+    # 좋아요는 한개만 가능하다
     def test_a_user_can_like_an_article_only_once(self) -> None:
         # Given
         user = User.objects.create(name="test")
@@ -42,10 +43,10 @@ class TestLikeService(TestCase):
             do_like(invalid_user_id, article.id)
 
     # article_id가 없는데 Input으로 들어온 경우
-    def test_it_should_raise_exception_when_like_an_article_does_not_exist(self) -> None:
+    def test_it_should_raise_exception_when_like_an_article_does_not_exist(self) -> None:  # 문제
         # Given
         user = User.objects.create(name="test")
-        invalid_article_id = 9988
+        invalid_article_id = 9980
 
         # Expect
         with self.assertRaises(Article.DoesNotExist):

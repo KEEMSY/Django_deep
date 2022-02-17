@@ -40,3 +40,12 @@ class TestLikeRouter(TestCase):
         # Then
         self.assertEqual(204, response.status_code)
         self.assertFalse(Like.objects.filter(id=like.id).exists())
+
+
+# user_id가 없을 때
+
+# article_id가 없을 때
+
+# 좋아요를 하고 또 하려고 할 때
+
+# 삭제하려고 할때, like_count가 0으로 보이는지
